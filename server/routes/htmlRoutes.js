@@ -1,6 +1,11 @@
+// server/routes/htmlRoutes.js
 const path = require('path');
 
-module.exports = (app) =>
+module.exports = function(app) {
   app.get('/', (req, res) =>
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'))
+    res.sendFile(path.join(__dirname, '../../client/dist/index.html'))
   );
+
+  // Add more routes as needed
+};
+

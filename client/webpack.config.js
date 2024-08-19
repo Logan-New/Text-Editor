@@ -1,17 +1,22 @@
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const path = require('path');
 
 module.exports = {
-  entry: './client/js/index.js', // Adjusted entry point if needed
+  context: path.resolve(__dirname), // Context is the current directory
+  entry: './src/index.js', // Correctly point to client/src/index.js
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
+    publicPath: '/',
   },
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -22,39 +27,11 @@ module.exports = {
           },
         },
       },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].[ext]',
-              context: 'src',
-            },
-          },
-        ],
-      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html', // Adjusted template path
+      template: './public/index.html',
     }),
-    new MiniCssExtractPlugin({
-      filename: 'styles.css',
-    }),
-    new WorkboxPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-    }),
-  ],
-  devServer: {
-    static: path.resolve(__dirname, 'dist'),
-    port: 3000,
-    open: true,
-  },
-};
+    new MiniCss
+  ]};

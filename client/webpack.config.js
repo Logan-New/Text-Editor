@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
-  entry: './src/js/index.js', // Adjusted entry point if needed
+  entry: './client/js/index.js', // Adjusted entry point if needed
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
